@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="/css/home.css"/>
+    <script>
+        const title = "<%=title%>";
+        //console.log(Title);
+        const data = "<%=data%>";
+        //const reData = data..replace(/\./gi, ".<br/>");
+        //console.log(Data);
+    </script>
+</head>
+<body>
+    <main>
+        <header>
+            <h1 class="session_title"> <%=title%> </h1>
+        </header>
+        <div class="session">
+            <p class="session_text"> <%=data%> </p>
+        </div>
+    </main>
+</body>
+</html>
