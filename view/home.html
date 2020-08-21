@@ -7,6 +7,11 @@
     <link rel="stylesheet" type="text/css" href="/css/home.css"/>
 </head>
 <body>
-    <span>Hello World!!</span>
+    <form class="form" action="/text-viewer" method="POST">
+        <label>URL을 입력하세요: </label>
+        <input type="text" name="url" placeholder="Text URL" size="50" />
+        <input type="submit" value="입력" />
+    </form>
+    <!-- <button onclick="location.href='/text-viewer'">Text Viewer</button> -->
 </body>
 </html>

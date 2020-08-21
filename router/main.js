@@ -1,5 +1,10 @@
-import express from "express";
+import express, { request } from "express";
+import axios from "axios";
+import cheerio from "cheerio";
+
 const router = express.Router();
+const bodyParser = require('body-parser')
+router.use(bodyParser.urlencoded({extended:false}))
 
 router.get("/", (req, res) => {
    res.render("home.html");
@@ -9,54 +14,38 @@ export default router;
 
 
 
-
-
-import axios from "axios";
-import cheerio from "cheerio";
+var url = "";
 
 async function getHTML() {
-  try {
-    return await axios.get("https://jrstrans.tistory.com/108");
-  } catch (error) {
-    console.error(error);
-  }
+   try {
+      return await axios.get(url);
+   } catch (error) {
+      console.error(error);
+   }
 }
 
-// router.get("/text-viewer", (req, res) => {
-//    getHTML().then(html => {
-//       let textList = [];
-//       const $ = cheerio.load(html.data);
-//       const bodyList = $("div.tt_article_useless_p_margin p").children("span");
-//       const title = $("div.titleWrap").find("h2 a").text().replace(/~/gi, "");
-
-//       bodyList.each(function(i, elem) {
-//          textList[i] = {
-//             text: $(this).text().replace(/\n/gi, "<br/>"), 
-//             space: '<br/>'
-//          };
-//       });
-
-//       res.render("viewer.ejs", { data: JSON.stringify(textList), title: title });
-//       return "";
-//    })
-// });
-
-
-router.get("/text-viewer", (req, res) => {
-   getHTML().then((html) => {
-      let dataList;
+router.post("/text-viewer", (req, res) => {
+   url = req.body.url;
+   //console.log(url);
+   getHTML().then(html => {
+      let textList = [];
       const $ = cheerio.load(html.data);
+      const bodyList = $("div.tt_article_useless_p_margin p").children("span");
       const title = $("div.titleWrap").find("h2 a").text().replace(/~/gi, "");
-      const $data = $("div.tt_article_useless_p_margin p").children("span");
-      //const raw = data.find("span").text();
-      $data.each((idx, elem) => {
-         dataList = $data.text().replace(/\. /gi, ".<br/>").replace(/\」/gi, '」<br/>').replace(/\)/gi,')<br/>' )
+
+      bodyList.each(function (i, elem) {
+         textList[i] = $(this).text().replace(/\n/gi, "");
+         // textList[i] = {
+         //    text: $(this).text().replace(/\n/gi, "<br/>"), 
+         //    space: '<br/>'
+         // };
       });
 
-      //console.log(JSON.stringify(dataList));
-      //console.log(title);
+      //console.log(textList[7]);
 
-      res.render("viewer.ejs", { data: JSON.stringify(dataList), title: title });
+      const tem = Object.assign({}, textList); // {0:"a", 1:"b", 2:"c"}
+      res.render("viewer.ejs", { data: JSON.stringify(tem), title: title });
+
       return "";
-   });
+   })
 });
