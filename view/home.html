@@ -9,9 +9,15 @@
 <body>
     <form class="form" action="/text-viewer" method="POST">
         <label>URL을 입력하세요: </label>
-        <input type="text" name="url" placeholder="Text URL" size="50" />
+        <input type="text" name="url" placeholder="Text URL" size="50"/>
         <input type="submit" value="입력" />
     </form>
-    <!-- <button onclick="location.href='/text-viewer'">Text Viewer</button> -->
+    <p id="back"> </p>
+    <script>
+        const backUrl = localStorage.getItem("URL"); //마지막으로 크롤링한 url을 localStorage에서 불러오기
+        if(backUrl != null){
+            document.getElementById("back").innerHTML = "이전 Url: " + backUrl; //이전 url 표시
+        }
+    </script>
 </body>
 </html>
