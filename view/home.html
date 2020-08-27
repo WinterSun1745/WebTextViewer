@@ -7,16 +7,29 @@
     <link rel="stylesheet" type="text/css" href="/css/home.css"/>
 </head>
 <body>
-    <form class="form" action="/text-viewer" method="POST">
-        <label>URL을 입력하세요: </label>
+    <!-- <form class="form" action="/tistory-viewer" method="POST">
+        <label>Tistory URL을 입력하세요: </label>
+        <input type="text" name="tistoryUrl" placeholder="Text URL" size="50"/>
+        <input type="submit" value="입력" />
+    </form>
+    <p id="back-tistory"> </p> -->
+
+    <form class="form" action="/naver-viewer" method="POST">
+        <label>NaverBlog URL을 입력하세요: </label>
         <input type="text" name="url" placeholder="Text URL" size="50"/>
         <input type="submit" value="입력" />
     </form>
-    <p id="back"> </p>
+    <p id="back-naver"> </p>
+
     <script>
-        const backUrl = localStorage.getItem("URL"); //마지막으로 크롤링한 url을 localStorage에서 불러오기
-        if(backUrl != null){
-            document.getElementById("back").innerHTML = "이전 Url: " + backUrl; //이전 url 표시
+        // const backUrl = localStorage.getItem("TistoryUrl"); //마지막으로 크롤링한 url을 localStorage에서 불러오기
+        // if(backUrl != null){
+        //     document.getElementById("back-tistory").innerHTML = "이전 Url: " + backUrl; //이전 url 표시
+        // }
+
+        const naverBackUrl = localStorage.getItem("NaverUrl"); //마지막으로 크롤링한 url을 localStorage에서 불러오기
+        if(naverBackUrl != null){
+            document.getElementById("back-naver").innerHTML = "이전 Url: " + naverBackUrl; //이전 url 표시
         }
     </script>
 </body>
